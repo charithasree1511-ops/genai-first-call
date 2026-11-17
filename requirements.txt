@@ -1,2 +1,3 @@
-git config --global user.name "Charitha"openai
+openai
 python-dotenv
+google-genai

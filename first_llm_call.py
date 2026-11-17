@@ -1,24 +1,19 @@
 from dotenv import load_dotenv
-from openai import OpenAI
+from google import genai
 import os
 
-# Load environment variables
 load_dotenv()
 
-# Get API key
-api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
-    raise RuntimeError("API key is missing. Check your .env file.")
+    raise RuntimeError("GEMINI_API_KEY is missing. Check your .env file.")
 
-# Create OpenAI client
-client = OpenAI(api_key=api_key)
+client = genai.Client(api_key=api_key)
 
-# Send a prompt to the AI model
-response = client.responses.create(
-    model="gpt-5.5",
-    input="Explain Generative AI in simple terms in three bullet points."
+response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents="Explain Generative AI in simple terms in three bullet points."
 )
 
-# Display the generated answer
-print(response.output_text)
+print(response.text)
